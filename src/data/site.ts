@@ -3,17 +3,17 @@
 export const site = {
   // CONTOH: nama sementara. Ganti di sini saja, semua halaman ikut berubah.
   name: 'whitescale',
-  title: 'whitescale | Studio software untuk website, aplikasi & sistem custom',
+  title: 'whitescale | Best Software Solutions for Your Businesses',
   description:
-    'whitescale membangun website, aplikasi mobile, software custom, dan produk digital untuk bisnis, dari ide pertama sampai dipakai setiap hari.',
+    'Mitra teknologi tepercaya untuk transformasi digital Anda. Whitescale menyediakan layanan custom software, website, & aplikasi mobile dengan standar terbaik.',
   // CONTOH: ganti dengan nomor & email asli.
-  whatsapp: '6281200000000',
-  whatsappLabel: '0812 0000 0000',
-  email: 'halo@whitescale.id',
+  whatsapp: '085725082898',
+  whatsappLabel: '0857 2508 2898',
+  email: 'whitescaleapps@gmail.com',
   // CONTOH: ganti dengan alamat asli.
   address: {
-    street: 'Jl. Contoh Raya No. 12',
-    city: 'Surabaya 60234',
+    street: 'Rungkut',
+    city: 'Surabaya',
     hours: 'Senin–Jumat, 09.00–17.00 WIB',
     mapUrl: 'https://maps.google.com/?q=Surabaya',
   },
@@ -37,7 +37,7 @@ export const nav = [
 
 // CONTOH: harga dan durasi perkiraan.
 export const facts = [
-  { label: 'Website mulai', value: 'Rp 4,5 jt' },
+  { label: 'Website mulai', value: 'Rp 4 jt' },
   { label: 'Website selesai', value: '2–3 minggu' },
   { label: 'Garansi bug', value: '3 bulan' },
   { label: 'Source code', value: '100% milikmu' },
@@ -141,15 +141,15 @@ export const process = [
 
 // CONTOH: harga perkiraan. Sesuaikan dengan harga asli.
 export const scales = [
-  { label: 'Website', price: 'Rp 4,5 jt', time: '2–3 minggu', includes: 'Sampai 6 halaman, desain custom, SEO dasar, domain dan hosting tahun pertama.' },
-  { label: 'Web app', price: 'Rp 25 jt', time: '6–8 minggu', includes: 'Sistem booking, portal member, atau dashboard internal dengan panel admin.' },
-  { label: 'Aplikasi mobile', price: 'Rp 40 jt', time: '8–12 minggu', includes: 'Android dan iOS dengan login, notifikasi, pembayaran, dan panel admin.' },
-  { label: 'Sistem custom', price: 'Rp 75 jt', time: '3–5 bulan', includes: 'ERP, inventori multi-gudang, atau HR dan penggajian untuk ratusan karyawan.' },
+  { label: 'Website', price: 'Rp 4 jt', time: '2–3 minggu', includes: 'Desain custom, SEO dasar, domain dan hosting tahun pertama.' },
+  { label: 'Web app', price: 'Rp 20 jt', time: '4–6 minggu', includes: 'Sistem booking, portal member, atau dashboard internal dengan panel admin.' },
+  { label: 'Aplikasi mobile', price: 'Rp 35 jt', time: '6–8 minggu', includes: 'Android dan iOS dengan login, notifikasi, pembayaran, dan panel admin.' },
+  { label: 'Sistem custom', price: 'Rp 50 jt', time: '8–12 minggu', includes: 'ERP, inventori multi-gudang, atau HR dan penggajian untuk ratusan karyawan.' },
 ];
 
 export const faqs = [
-  { q: 'Berapa biaya membuat website atau aplikasi?', a: 'Website mulai dari Rp 4,5 juta, aplikasi dan sistem custom tergantung ruang lingkupnya. Setelah konsultasi kamu menerima harga tetap tertulis, jadi tidak ada biaya tambahan diam-diam.' },
-  { q: 'Berapa lama pengerjaannya?', a: 'Website 2–3 minggu. Web app 6–8 minggu. Aplikasi mobile 8–12 minggu. Sistem custom 3–5 bulan. Jadwal pasti ada di dokumen ruang lingkup.' },
+  { q: 'Berapa biaya membuat website atau aplikasi?', a: 'Website mulai dari Rp 4 juta, aplikasi dan sistem custom tergantung ruang lingkupnya. Setelah konsultasi kamu menerima harga tetap tertulis, jadi tidak ada biaya tambahan diam-diam.' },
+  { q: 'Berapa lama pengerjaannya?', a: 'Website 2–3 minggu. Web app 4-6 minggu. Aplikasi mobile 6–8 minggu. Sistem custom 8–12 minggu. Jadwal pasti ada di dokumen ruang lingkup.' },
   { q: 'Apakah source code jadi milik saya?', a: 'Ya. Source code, akun server, dan akun Play Store atau App Store atas nama bisnismu. Kamu bebas melanjutkan dengan tim lain kapan saja.' },
   { q: 'Bagaimana sistem pembayarannya?', a: 'Dibagi per tahap: 30% di awal, 40% setelah desain disetujui, dan 30% saat rilis. Untuk proyek besar bisa per sprint.' },
   { q: 'Bagaimana setelah aplikasinya rilis?', a: 'Tiga bulan pertama perbaikan bug gratis. Setelah itu ada paket maintenance bulanan untuk update keamanan, monitoring, dan fitur baru.' },
