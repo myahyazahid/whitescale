@@ -3,25 +3,30 @@
 export const site = {
   // CONTOH: nama sementara. Ganti di sini saja, semua halaman ikut berubah.
   name: 'whitescale',
-  title: 'whitescale | Best Software Solutions for Your Businesses',
+  tagline: 'software house di Surabaya',
+  // Title & description beranda: kata kunci utama di depan, maks ±60 dan ±155 karakter agar tidak terpotong di Google.
+  title: 'Jasa Pembuatan Website & Aplikasi Surabaya | whitescale',
   description:
-    'Mitra teknologi tepercaya untuk transformasi digital Anda. Whitescale menyediakan layanan custom software, website, & aplikasi mobile dengan standar terbaik.',
+    'Software house di Surabaya untuk jasa pembuatan website, aplikasi Android & iOS, dan software custom. Melayani seluruh Indonesia. Konsultasi gratis.',
   // CONTOH: ganti dengan nomor & email asli.
-  whatsapp: '085725082898',
+  // Format internasional tanpa "+" dan tanpa 0 di depan (62...), wajib untuk link wa.me.
+  whatsapp: '6285725082898',
   whatsappLabel: '0857 2508 2898',
   email: 'whitescaleapps@gmail.com',
   // CONTOH: ganti dengan alamat asli.
   address: {
     street: 'Rungkut',
     city: 'Surabaya, Indonesia',
+    // dipakai data terstruktur (schema.org) untuk pencarian lokal
+    locality: 'Surabaya',
+    region: 'Jawa Timur',
     hours: 'Senin–Jumat, 09.00–17.00 WIB',
+    openingHours: 'Mo-Fr 09:00-17:00',
     mapUrl: 'https://maps.google.com/?q=Surabaya',
   },
-  social: [
-    { label: 'Instagram', href: 'https://instagram.com/' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/' },
-    { label: 'GitHub', href: 'https://github.com/' },
-  ],
+  // Isi dengan URL profil asli, mis. { label: 'Instagram', href: 'https://instagram.com/whitescale' }.
+  // Dibiarkan kosong: link ke beranda instagram.com/linkedin.com tanpa akun tidak berguna dan dibaca Google sebagai link mati.
+  social: [] as { label: string; href: string }[],
 };
 
 export const waLink = (text: string) =>
