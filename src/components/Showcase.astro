@@ -1,0 +1,52 @@
+---
+import { projects } from '../data/site';
+import WorkTile from './WorkTile.astro';
+import Icon from './Icon.astro';
+
+const desk = projects.find((p) => p.name === 'Klinik Sehat Sentosa')!;
+const phone = projects.find((p) => p.name === 'Antar Kilat')!;
+const chips = [
+  ['Company profile', 'Web'],
+  ['Toko online', 'Web'],
+  ['Android & iOS', 'Mobile'],
+  ['ERP & inventori', 'Sistem'],
+  ['Dashboard', 'Sistem'],
+  ['Fitur AI', 'Produk'],
+];
+---
+
+<section class="band" aria-labelledby="showcase-title">
+  <div class="frame">
+    <div class="inner grid">
+      <div class="visual" data-reveal>
+        <div class="desk"><WorkTile project={desk} /></div>
+        <div class="phone"><WorkTile project={phone} /></div>
+      </div>
+      <div class="text">
+        <p class="label" data-reveal>Untuk bisnis</p>
+        <h2 class="h2" id="showcase-title" data-reveal style="--i: 1">Mulai dari website, tumbuh jadi sistem.</h2>
+        <p class="lead" data-reveal style="--i: 2">Tidak perlu membangun semuanya sekaligus. Mulai dari yang paling dibutuhkan, lalu tambah fitur saat bisnismu siap.</p>
+        <ul class="chips" data-reveal style="--i: 3">
+          {chips.map(([name, tag]) => <li><span>{name}</span><span class="mono">{tag}</span></li>)}
+        </ul>
+        <a class="btn btn-brand" href="/layanan" data-reveal style="--i: 4">Lihat layanan <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+  .visual { position: relative; aspect-ratio: 5 / 4; border-radius: var(--radius); background: var(--dark); padding: 7% 18% 7% 7%; }
+  .desk { position: relative; height: 100%; border-radius: 8px; overflow: hidden; }
+  .phone { position: absolute; right: 6%; bottom: -6%; width: 30%; aspect-ratio: 9 / 17; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 6px var(--dark), 0 20px 40px rgba(0, 0, 0, 0.25); }
+  .text { display: grid; gap: 1.1rem; justify-items: start; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.5rem 0; }
+  .chips li { display: inline-flex; align-items: center; gap: 0.5rem; padding: 6px 12px; background: var(--white); border: 1px solid var(--line); border-radius: 999px; font-size: 14px; }
+  .chips .mono { font-size: 10px; color: var(--muted); }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: 1fr; }
+    .visual { margin-bottom: 2rem; }
+  }
+</style>

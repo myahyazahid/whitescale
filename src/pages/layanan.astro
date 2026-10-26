@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ServicesRow from '../components/ServicesRow.astro';
+import ServiceDetail from '../components/ServiceDetail.astro';
+import Showcase from '../components/Showcase.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { waLink } from '../data/site';
+---
+
+<Base title="Layanan | whitescale" description="Website, aplikasi mobile, software custom, dan produk digital dari whitescale.">
+  <PageHero label="Layanan" title="Satu tim untuk semua kebutuhan digitalmu" lead="Empat jenis pekerjaan, dikerjakan tim yang sama dari riset, desain, development, sampai maintenance.">
+    <a class="btn btn-brand" href={waLink('Halo, saya mau konsultasi layanan.')} target="_blank" rel="noopener">Konsultasi gratis</a>
+    <a class="btn btn-outline" href="/harga">Lihat harga</a>
+  </PageHero>
+  <ServicesRow showHead={false} />
+  <ServiceDetail />
+  <Showcase />
+  <CtaBand />
+</Base>

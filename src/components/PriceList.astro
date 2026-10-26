@@ -1,0 +1,56 @@
+---
+import { scales, waLink } from '../data/site';
+import SectionHead from './SectionHead.astro';
+import Icon from './Icon.astro';
+
+interface Props { showHead?: boolean }
+const { showHead = true } = Astro.props;
+---
+
+<section class="band" aria-labelledby="harga-title">
+  <div class="frame">
+    <div class="inner">
+      {showHead ? (
+        <SectionHead label="Harga" id="harga-title" title="Harga jelas dari awal" text="Harga awal di bawah adalah perkiraan. Setelah konsultasi, kamu menerima harga tetap tertulis sesuai ruang lingkup.">
+          <a slot="action" class="btn btn-ghost mono" href="/harga">Detail harga <Icon name="arrow" /></a>
+        </SectionHead>
+      ) : <h2 id="harga-title" class="sr-only">Daftar harga</h2>}
+      <ul class="rows">
+        {scales.map((s, i) => (
+          <li data-reveal style={`--i: ${i}`}>
+            <a href={waLink(`Halo, saya mau diskusi proyek ${s.label}.`)} target="_blank" rel="noopener">
+              <span class="mono kind">{s.label}</span>
+              <span class="desc">{s.includes}</span>
+              <span class="mono time">{s.time}</span>
+              <span class="price">mulai <strong>{s.price}</strong></span>
+              <span class="mono go">Diskusi <Icon name="arrow" size={14} /></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rows { border-top: 1px solid var(--line); }
+  li { border-bottom: 1px solid var(--line); }
+  a { display: grid; grid-template-columns: 9rem 1fr 8rem 10rem 7rem; gap: 1.5rem; align-items: center; padding: 1.4rem 0.75rem; transition: background-color 160ms ease; }
+  a:hover { background: var(--white); }
+  .kind { font-size: 11.5px; color: var(--muted); }
+  .desc { font-size: 15px; color: var(--ink-soft); }
+  .time { font-size: 11.5px; color: var(--muted); }
+  .price { font-size: 14px; color: var(--muted); }
+  .price strong { font-size: 1.125rem; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; }
+  .go { font-size: 11.5px; display: inline-flex; gap: 0.4rem; align-items: center; justify-self: end; }
+  a:hover .go { color: var(--brand-text); }
+
+  @media (max-width: 860px) {
+    a { grid-template-columns: 1fr auto; gap: 0.5rem 1rem; padding: 1.25rem 0; }
+    .kind { grid-column: 1; }
+    .time { grid-column: 2; justify-self: end; }
+    .desc { grid-column: 1 / -1; }
+    .price { grid-column: 1; }
+    .go { grid-column: 2; }
+  }
+</style>

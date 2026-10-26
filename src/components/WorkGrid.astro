@@ -1,0 +1,56 @@
+---
+import { projects, kindLabel, waLink } from '../data/site';
+import SectionHead from './SectionHead.astro';
+import WorkTile from './WorkTile.astro';
+import Icon from './Icon.astro';
+
+interface Props { limit?: number; showHead?: boolean }
+const { limit, showHead = true } = Astro.props;
+const list = limit ? projects.slice(0, limit) : projects;
+---
+
+<section class="band" aria-labelledby="karya-title">
+  <div class="frame">
+    <div class="inner">
+      {showHead ? (
+        <SectionHead label="Karya" id="karya-title" title="Lihat apa yang sudah kami bangun">
+          <a slot="action" class="btn btn-ghost mono" href="/karya">Lihat semua karya <Icon name="arrow" /></a>
+        </SectionHead>
+      ) : <h2 id="karya-title" class="sr-only">Daftar karya</h2>}
+      <ul class="grid">
+        {list.map((p, i) => (
+          <li data-reveal style={`--i: ${i % 3}`}>
+            <a class="card" href={waLink(`Halo, saya tertarik dengan proyek seperti ${p.name}.`)} target="_blank" rel="noopener">
+              <div class="top">
+                <span class="mono tag">{kindLabel[p.kind]}</span>
+                <span class="go"><Icon name="arrow-up-right" size={14} /></span>
+              </div>
+              <div class="shot"><WorkTile project={p} /></div>
+              <div class="text">
+                <h3>{p.name}</h3>
+                <p class="muted">{p.summary}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .card { display: grid; gap: 1.25rem; height: 100%; padding: 1.25rem; background: var(--card); border-radius: var(--radius); transition: background-color 200ms ease; }
+  .card:hover { background: var(--card-hover); }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .tag { font-size: 11px; color: var(--muted); }
+  .go { width: 28px; height: 28px; border-radius: 50%; background: var(--white); display: grid; place-items: center; transition: transform 200ms var(--ease-out), background-color 200ms ease, color 200ms ease; }
+  .card:hover .go { background: var(--brand); color: #fff; transform: rotate(45deg); }
+  .shot { position: relative; aspect-ratio: 16 / 10; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); transition: transform 300ms var(--ease-out); }
+  .card:hover .shot { transform: scale(1.015); }
+  h3 { font-size: 1.0625rem; letter-spacing: -0.02em; }
+  .text p { font-size: 14.5px; margin-top: 0.25rem; }
+
+  @media (max-width: 960px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+</style>

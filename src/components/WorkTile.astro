@@ -1,0 +1,75 @@
+---
+import type { Project } from '../data/site';
+
+interface Props { project: Project }
+const { project: p } = Astro.props;
+const navWords = ['Beranda', 'Produk', 'Kontak'];
+---
+
+<div class={`ui ui-${p.kind} tone-${p.tone}`} data-ui aria-hidden="true">
+  {p.kind === 'web' && (
+    <div class="web">
+      <div class="web-bar"><b>{p.name}</b><span>{navWords.join('   ')}</span></div>
+      <div class="web-hero">{p.headline}</div>
+      <div class="web-rows">{p.rows.map(([k, v]) => <span><em>{k}</em>{v}</span>)}</div>
+      <span class="web-btn">Pesan sekarang</span>
+    </div>
+  )}
+  {p.kind === 'mobile' && (
+    <div class="phone">
+      <div class="phone-top"><span>9.41</span><b>{p.name}</b></div>
+      <div class="phone-head">{p.headline}</div>
+      {p.rows.map(([k, v]) => <div class="phone-row"><span>{k}</span><b>{v}</b></div>)}
+      <span class="phone-btn">Lihat detail</span>
+    </div>
+  )}
+  {p.kind === 'system' && (
+    <div class="sys">
+      <div class="sys-top"><b>{p.name}</b><span>Admin</span></div>
+      <div class="sys-head">{p.headline}</div>
+      <table>
+        <tbody>{p.rows.map(([k, v]) => <tr><td>{k}</td><td>{v}</td></tr>)}</tbody>
+      </table>
+    </div>
+  )}
+</div>
+
+<style>
+  .ui { position: absolute; inset: 0; container-type: size; overflow: hidden; font-family: var(--font); }
+  .tone-paper { background: #ffffff; color: #141414; --ui-accent: #6e54ff; --ui-soft: #f1f0ee; }
+  .tone-lilac { background: #efeaff; color: #1d1546; --ui-accent: #6e54ff; --ui-soft: #e2daff; }
+  .tone-purple { background: #6e54ff; color: #ffffff; --ui-accent: #141414; --ui-soft: #7d66ff; }
+  .tone-ink { background: #161817; color: #ffffff; --ui-accent: #6e54ff; --ui-soft: #222524; }
+  .tone-sand { background: #f1ece3; color: #2a2118; --ui-accent: #a0055d; --ui-soft: #e7e0d3; }
+  .tone-sky { background: #e8f0fe; color: #0f1d3a; --ui-accent: #2b59d9; --ui-soft: #d8e4fc; }
+
+  /* website */
+  .web { height: 100%; display: flex; flex-direction: column; padding: 6cqh 5cqw; gap: 5cqh; }
+  .web-bar { display: flex; justify-content: space-between; gap: 1rem; font-size: max(13px, min(4.2cqh, 2.6cqw)); white-space: nowrap; }
+  .web-bar span { white-space: pre; opacity: 0.85; }
+  @container (max-width: 460px) { .web-bar span { display: none; } }
+  .web-hero { font-weight: 600; letter-spacing: -0.04em; line-height: 0.95; font-size: max(20px, min(17cqh, 11cqw)); max-width: 9ch; }
+  .web-rows { display: flex; gap: 6cqw; font-size: max(13px, min(4.4cqh, 3cqw)); margin-top: auto; }
+  .web-rows span { display: grid; }
+  .web-rows em { font-style: normal; opacity: 0.8; }
+  .web-btn { align-self: flex-start; border-radius: 4px; background: var(--ui-accent); color: #fff; padding: 2cqh 4cqw; font-size: max(13px, min(4.4cqh, 3cqw)); font-weight: 600; }
+
+  /* mobile: the tile is a phone screen */
+  .phone { position: absolute; top: 7%; bottom: -4%; left: 50%; transform: translateX(-50%); aspect-ratio: 9 / 19; background: var(--ui-soft); border-radius: 7cqh 7cqh 0 0; padding: 6cqh 5cqh; display: flex; flex-direction: column; gap: 3cqh; }
+  .phone-top { display: flex; justify-content: space-between; gap: 0.5rem; font-size: max(13px, 3.4cqh); }
+  .phone-top b { text-align: right; }
+  .phone-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1; font-size: max(15px, min(5cqh, 9cqw)); margin-top: 2cqh; }
+  .phone-row { display: flex; justify-content: space-between; gap: 0.5rem; font-size: max(13px, 3.6cqh); padding-block: 1.6cqh; }
+  .phone-row span { opacity: 0.8; }
+  .phone-btn { margin-top: auto; margin-bottom: 8cqh; text-align: center; border-radius: 6px; background: var(--ui-accent); color: #fff; padding: 2.4cqh; font-size: max(13px, 3.6cqh); font-weight: 600; }
+
+  /* internal system */
+  .sys { height: 100%; display: flex; flex-direction: column; padding: 6cqh 5cqw; gap: 4cqh; }
+  .sys-top { display: flex; justify-content: space-between; font-size: max(13px, min(4.2cqh, 2.8cqw)); }
+  .sys-top span { background: var(--ui-soft); padding: 0.5cqh 2cqw; }
+  .sys-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1; font-size: max(18px, min(11cqh, 8cqw)); }
+  table { width: 100%; border-collapse: collapse; font-size: max(13px, min(4.8cqh, 3.2cqw)); font-variant-numeric: tabular-nums; margin-top: auto; }
+  td { padding: 2.2cqh 0; }
+  tr + tr td { border-top: 1px solid var(--ui-soft); }
+  td + td { text-align: right; font-weight: 600; }
+</style>

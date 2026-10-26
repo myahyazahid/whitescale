@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactList from '../components/ContactList.astro';
+import Faq from '../components/Faq.astro';
+import { waLink } from '../data/site';
+---
+
+<Base title="Kontak | whitescale" description="Hubungi whitescale untuk konsultasi proyek gratis.">
+  <PageHero label="Kontak" title="Ceritakan idemu, kami bantu petakan" lead="Konsultasi pertama gratis. Cara tercepat lewat WhatsApp, biasanya kami balas di hari yang sama.">
+    <a class="btn btn-brand" href={waLink('Halo, saya mau konsultasi proyek.')} target="_blank" rel="noopener">Chat WhatsApp</a>
+  </PageHero>
+  <ContactList />
+  <Faq />
+</Base>

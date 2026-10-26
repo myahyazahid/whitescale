@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ServicesRow from '../components/ServicesRow.astro';
+import BigNumber from '../components/BigNumber.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import ProcessDark from '../components/ProcessDark.astro';
+import Showcase from '../components/Showcase.astro';
+import PriceList from '../components/PriceList.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+
+<Base>
+  <Hero />
+  <ServicesRow />
+  <BigNumber value={100} suffix="%" title="Source code jadi milikmu, bukan milik kami." />
+  <WorkGrid limit={6} />
+  <ProcessDark />
+  <Showcase />
+  <PriceList />
+  <CtaBand />
+</Base>

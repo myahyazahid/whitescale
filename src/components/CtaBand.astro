@@ -1,0 +1,46 @@
+---
+import { waLink } from '../data/site';
+import Icon from './Icon.astro';
+
+const floaters = [
+  { icon: 'globe', x: '14%', y: '18%', c: '#6e54ff' },
+  { icon: 'phone', x: '80%', y: '20%', c: '#141414' },
+  { icon: 'chart', x: '9%', y: '58%', c: '#a0055d' },
+  { icon: 'cart', x: '86%', y: '56%', c: '#6e54ff' },
+  { icon: 'bolt', x: '20%', y: '84%', c: '#141414' },
+  { icon: 'shield', x: '76%', y: '84%', c: '#a0055d' },
+] as const;
+---
+
+<section class="band cta" aria-labelledby="cta-title">
+  <div class="field">
+    {floaters.map((f, i) => (
+      <span class="floater" style={`left:${f.x}; top:${f.y}; color:${f.c}; --d:${i * 0.6}s`} aria-hidden="true"><Icon name={f.icon} size={20} /></span>
+    ))}
+    <div class="content">
+      <h2 class="h2" id="cta-title">Punya ide? Ayo kita bangun bersama.</h2>
+      <div class="actions">
+        <a class="btn btn-brand" href={waLink('Halo, saya punya ide proyek.')} target="_blank" rel="noopener">Konsultasi gratis</a>
+        <a class="btn btn-outline" href="/harga">Lihat harga <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .field {
+    position: relative; min-height: 440px; display: grid; place-items: center; overflow: hidden;
+    background: linear-gradient(180deg, transparent 0%, rgba(110, 84, 255, 0.10) 55%, rgba(110, 84, 255, 0.28) 85%, rgba(255, 161, 161, 0.35) 100%);
+  }
+  .content { position: relative; z-index: 1; display: grid; gap: 2rem; justify-items: center; text-align: center; padding: 4rem var(--pad); }
+  .h2 { max-width: 18ch; font-size: clamp(2rem, 1.3rem + 2vw, 3rem); }
+  .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+  .floater {
+    position: absolute; width: 48px; height: 48px; border-radius: 12px; background: var(--white);
+    display: grid; place-items: center; box-shadow: 0 0 0 1px var(--line), 0 8px 24px rgba(48, 24, 160, 0.1);
+    animation: float 6s ease-in-out var(--d) infinite;
+  }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+  @media (prefers-reduced-motion: reduce) { .floater { animation: none; } }
+  @media (max-width: 700px) { .floater:nth-child(n + 3) { display: none; } }
+</style>

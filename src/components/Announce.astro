@@ -1,0 +1,35 @@
+---
+import { waLink } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<div class="announce" data-announce>
+  <a href={waLink('Halo, saya mau konsultasi gratis.')} target="_blank" rel="noopener">
+    <span class="pill">Gratis</span>
+    <span class="text">Konsultasi pertama tanpa biaya · ceritakan idemu hari ini</span>
+    <Icon name="arrow" size={14} />
+  </a>
+  <button type="button" aria-label="Tutup pengumuman" data-announce-close><Icon name="close" size={16} /></button>
+</div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-announce]');
+  const key = 'announce-closed';
+  try { if (localStorage.getItem(key)) bar?.remove(); } catch {}
+  bar?.querySelector('[data-announce-close]')?.addEventListener('click', () => {
+    bar.remove();
+    try { localStorage.setItem(key, '1'); } catch {}
+  });
+</script>
+
+<style>
+  .announce { position: relative; background: var(--brand); color: #fff; }
+  a { display: flex; align-items: center; justify-content: center; gap: 0.875rem; min-height: 44px; padding: 0 3rem; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+  a:hover .text { text-decoration: underline; text-underline-offset: 3px; }
+  .pill { background: #fff; color: var(--ink); padding: 3px 8px; border-radius: 4px; font-weight: 500; }
+  button { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: 0; color: #fff; cursor: pointer; padding: 6px; opacity: 0.85; }
+  button:hover { opacity: 1; }
+  @media (max-width: 640px) {
+    a { justify-content: flex-start; padding: 0.6rem 3rem 0.6rem 1rem; font-size: 11px; }
+  }
+</style>

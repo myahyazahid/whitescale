@@ -1,0 +1,87 @@
+---
+import { facts, stack, waLink } from '../data/site';
+import HeroLines from './HeroLines.astro';
+import Icon from './Icon.astro';
+---
+
+<section class="band hero">
+  <div class="frame">
+    <div class="stage">
+      <div class="glow" aria-hidden="true"></div>
+      <HeroLines />
+      <div class="content">
+        <h1 class="h1 title">Software yang tumbuh<br />bersama bisnismu</h1>
+        <div class="below">
+          <p class="lead">Kami membangun website, aplikasi mobile, dan sistem custom untuk bisnis, dari ide pertama sampai dipakai setiap hari.</p>
+          <div class="cta">
+            <a class="btn btn-brand" href={waLink('Halo, saya mau konsultasi gratis.')} target="_blank" rel="noopener">Konsultasi gratis</a>
+            <a class="btn btn-outline" href="/karya">Lihat karya <Icon name="arrow" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <dl class="facts">
+      {facts.map((f) => (
+        <div>
+          <dt class="mono">{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))}
+    </dl>
+
+    <div class="stack">
+      <p class="muted small">Stack yang kami pakai setiap hari</p>
+      <div class="marquee" aria-label={stack.join(', ')}>
+        <div class="track" aria-hidden="true">
+          {[...stack, ...stack].map((s) => <span>{s}</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stage { position: relative; min-height: 680px; overflow: hidden; display: flex; justify-content: center; }
+  .glow {
+    position: absolute; inset: 0 0 auto; height: 300px;
+    background:
+      radial-gradient(60% 100% at 45% 0%, rgba(110, 84, 255, 0.18), transparent 70%),
+      radial-gradient(40% 80% at 85% 0%, rgba(255, 161, 161, 0.18), transparent 70%);
+  }
+  .content { position: relative; z-index: 1; width: 100%; padding: 120px var(--pad) 64px; display: grid; justify-items: center; text-align: center; }
+  .title { max-width: 16ch; }
+  .below { margin-top: 200px; display: grid; justify-items: center; gap: 2rem; }
+  .lead { max-width: 52ch; }
+  .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; border-top: 1px solid var(--line); }
+  .facts > div { padding: 1.25rem var(--pad); text-align: center; display: grid; gap: 0.5rem; }
+  .facts > div + div { border-left: 1px solid var(--line); }
+  dt { color: var(--muted); font-size: 11px; }
+  dd { margin: 0; font-size: 1.625rem; letter-spacing: -0.03em; font-weight: 500; }
+
+  .stack { border-top: 1px solid var(--line); padding: 2rem 0 2.5rem; display: grid; gap: 1.5rem; justify-items: center; }
+  .small { font-size: 14px; }
+  .marquee { width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+  .track { display: flex; gap: 4rem; width: max-content; animation: slide 36s linear infinite; }
+  .track span { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.03em; color: #a3a3ad; white-space: nowrap; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; } }
+
+  @media (max-width: 760px) {
+    .stage { min-height: 600px; }
+    .content { padding-top: 72px; }
+    .below { margin-top: 150px; }
+    .facts { grid-template-columns: 1fr 1fr; }
+    .facts > div:nth-child(3) { border-left: 0; }
+    .facts > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    dd { font-size: 1.25rem; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    :global(.js) .title, :global(.js) .below { opacity: 0; transform: translateY(14px); animation: rise 900ms var(--ease-expo) forwards; }
+    :global(.js) .below { animation-delay: 200ms; }
+  }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+</style>

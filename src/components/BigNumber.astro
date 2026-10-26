@@ -1,0 +1,43 @@
+---
+interface Props { value: number; suffix?: string; title: string }
+const { value, suffix = '', title } = Astro.props;
+---
+
+<section class="band big" aria-label={title}>
+  <div class="frame">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="num" aria-hidden="true"><span data-count={value}>{value}</span>{suffix}</p>
+    <h2 class="h2 title">{title}</h2>
+  </div>
+</section>
+
+<script>
+  // Hitung naik sekali saat terlihat; angka akhir sudah ada di HTML bila script tidak jalan.
+  const els = document.querySelectorAll<HTMLElement>('[data-count]');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        io.unobserve(e.target);
+        const el = e.target as HTMLElement;
+        const end = Number(el.dataset.count);
+        const start = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - start) / 1600);
+          el.textContent = String(Math.round(end * (1 - Math.pow(1 - t, 3))));
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    els.forEach((el) => { el.textContent = '0'; io.observe(el); });
+  }
+</script>
+
+<style>
+  .frame { position: relative; overflow: hidden; min-height: 420px; display: grid; place-items: center; text-align: center; padding: 5rem var(--pad); }
+  .glow { position: absolute; inset: 0 0 auto; height: 220px; background: radial-gradient(50% 100% at 50% 0%, rgba(110, 84, 255, 0.16), transparent 70%); }
+  .num { grid-area: 1 / 1; font-size: clamp(7rem, 4rem + 14vw, 15rem); font-weight: 500; letter-spacing: -0.06em; line-height: 1; color: rgba(20, 20, 20, 0.07); font-variant-numeric: tabular-nums; }
+  .title { grid-area: 1 / 1; position: relative; max-width: 20ch; }
+</style>

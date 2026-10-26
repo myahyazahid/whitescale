@@ -1,0 +1,33 @@
+---
+import { faqs } from '../data/site';
+import SectionHead from './SectionHead.astro';
+---
+
+<section class="band" aria-labelledby="faq-title">
+  <div class="frame">
+    <div class="inner">
+      <SectionHead label="FAQ" id="faq-title" title="Pertanyaan yang sering muncul" text="Belum menemukan jawabannya? Tanyakan langsung lewat WhatsApp, biasanya kami balas di hari yang sama." />
+      <div class="list">
+        {faqs.map((f, i) => (
+          <details name="faq" open={i === 0}>
+            <summary><span>{f.q}</span><i aria-hidden="true"></i></summary>
+            <p class="muted">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .list { border-top: 1px solid var(--line); }
+  details { border-bottom: 1px solid var(--line); }
+  summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.4rem 0.75rem; font-size: 1.0625rem; font-weight: 500; letter-spacing: -0.01em; cursor: pointer; transition: color 160ms ease; }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--brand-text); }
+  summary i { position: relative; flex: none; width: 14px; height: 14px; }
+  summary i::before, summary i::after { content: ''; position: absolute; left: 0; top: 50%; width: 14px; height: 1.5px; margin-top: -0.75px; background: currentColor; transition: transform 240ms var(--ease-out); }
+  summary i::after { transform: rotate(90deg); }
+  details[open] summary i::after { transform: rotate(0deg); }
+  details p { padding: 0 0.75rem 1.5rem; max-width: 70ch; font-size: 15.5px; }
+</style>

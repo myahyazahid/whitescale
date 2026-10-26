@@ -1,0 +1,66 @@
+---
+import { nav, waLink } from '../data/site';
+import Logo from './Logo.astro';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="nav">
+  <div class="bar">
+    <a href="/" aria-label="Beranda"><Logo /></a>
+    <nav aria-label="Navigasi utama">
+      <ul class="links" id="nav-links">
+        {nav.map((item) => (
+          <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+        <li class="in-menu"><a class="btn btn-brand" href={waLink('Halo, saya mau konsultasi proyek.')} target="_blank" rel="noopener">Konsultasi</a></li>
+      </ul>
+    </nav>
+    <div class="actions">
+      <a class="btn btn-outline wide" href="/karya">Lihat karya</a>
+      <a class="btn btn-brand wide" href={waLink('Halo, saya mau konsultasi proyek.')} target="_blank" rel="noopener">Konsultasi</a>
+      <button class="menu btn btn-outline" type="button" aria-expanded="false" aria-controls="nav-links" data-menu>Menu</button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 249, 0.92); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+  .bar { max-width: var(--frame); margin-inline: auto; height: 64px; padding-inline: var(--pad); display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+  .links { display: flex; align-items: center; gap: 2.25rem; font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .links a { color: var(--ink-soft); transition: color 160ms ease; }
+  .links a:hover, .links a[aria-current='page'] { color: var(--brand-text); }
+  .in-menu { display: none; }
+  .actions { display: flex; align-items: center; gap: 0.5rem; }
+  .menu { display: none; }
+
+  @media (max-width: 960px) {
+    .wide { display: none; }
+    .menu { display: inline-flex; }
+    .links {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 0.5rem var(--pad) 1.25rem;
+      font-size: 14px; display: none;
+    }
+    .links li a { display: block; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+    .links .in-menu { display: block; margin-top: 1rem; }
+    .links .in-menu a { display: flex; border: 0; padding: 0 16px; color: #fff; }
+    .links.is-open { display: flex; }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu]');
+  const list = document.getElementById('nav-links');
+  if (btn && list) {
+    const set = (open: boolean) => {
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Tutup' : 'Menu';
+      list.classList.toggle('is-open', open);
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+  }
+</script>

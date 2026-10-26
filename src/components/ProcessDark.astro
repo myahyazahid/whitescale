@@ -1,0 +1,80 @@
+---
+import { process, waLink } from '../data/site';
+import Icon from './Icon.astro';
+
+interface Props { showHead?: boolean }
+const { showHead = true } = Astro.props;
+
+// Ilustrasi garis untuk tiap tahap, digambar dalam satu bahasa visual.
+const art = [
+  '<circle cx="60" cy="60" r="44" stroke-dasharray="2 5"/><path d="M34 46h52v26H54l-14 11V72h-6z"/><path d="M44 57h32M44 64h20"/>',
+  '<rect x="22" y="26" width="76" height="60" rx="6"/><path d="M22 40h76"/><circle cx="30" cy="33" r="1.6"/><circle cx="36" cy="33" r="1.6"/><rect x="32" y="50" width="26" height="26" rx="3" stroke-dasharray="3 4"/><path d="M66 52h22M66 60h16M66 68h20"/>',
+  '<circle cx="60" cy="60" r="40" stroke-dasharray="2 5"/><circle cx="60" cy="60" r="26"/><circle cx="60" cy="60" r="12"/><circle cx="60" cy="60" r="3" fill="currentColor"/>',
+  '<path d="M24 92 C 40 92, 46 30, 96 24" /><circle cx="24" cy="92" r="4"/><circle cx="96" cy="24" r="4" fill="currentColor"/><path d="M24 98h72M18 92V24" stroke-dasharray="3 4"/>',
+];
+---
+
+<section class="band dark" aria-labelledby="proses-title">
+  <div class="frame">
+    <div class="inner">
+      {showHead ? (
+        <div class="split head">
+          <div class="left">
+            <p class="label" data-reveal>Proses</p>
+            <h2 class="h2" id="proses-title" data-reveal style="--i: 1">Cara kami bekerja, tanpa kejutan.</h2>
+            <a class="btn btn-brand" href="/proses" data-reveal style="--i: 2">Lihat prosesnya</a>
+          </div>
+          <p class="lead text" data-reveal style="--i: 2">Empat tahap yang sama untuk proyek kecil maupun besar. Kamu selalu tahu proyek sedang di mana, apa yang sudah jadi, dan apa yang berikutnya.</p>
+        </div>
+      ) : <h2 id="proses-title" class="sr-only">Tahapan proyek</h2>}
+
+      <ol class="cards">
+        {process.map((p, i) => (
+          <li class="card" data-reveal style={`--i: ${i}`}>
+            <span class="plus"><Icon name="plus" size={16} /></span>
+            <svg class="art" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" set:html={art[i]} />
+            <div class="meta">
+              <span class="mono when">{p.when}</span>
+              <h3>{p.title}</h3>
+              <p>{p.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      {!showHead && (
+        <div class="after">
+          <a class="btn btn-brand" href={waLink('Halo, saya mau mulai dari tahap konsultasi.')} target="_blank" rel="noopener">Mulai konsultasi</a>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .dark { background: var(--dark); border-bottom-color: var(--dark-line); }
+  .dark .frame { background: var(--dark); border-color: var(--dark-line); color: #fff; }
+  .dark .frame::before, .dark .frame::after { background: rgba(255, 255, 255, 0.25); }
+  .head { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+  .left { display: grid; gap: 1rem; justify-items: start; }
+  .left .btn { margin-top: 0.75rem; }
+  .label { color: #9b8bff; }
+  .text { color: var(--dark-muted); max-width: 44ch; justify-self: end; }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .card { position: relative; display: grid; grid-template-rows: auto 1fr; background: var(--dark-card); border: 1px solid var(--dark-line); border-radius: var(--radius); overflow: hidden; }
+  .plus { position: absolute; top: 14px; right: 14px; color: var(--dark-muted); }
+  .art { width: 100%; height: 190px; padding: 28px 0 10px; color: #c9c9d6; transition: color 300ms ease, transform 400ms var(--ease-out); }
+  .card:hover .art { color: #9b8bff; transform: scale(1.04); }
+  .meta { padding: 1.25rem; border-top: 1px solid var(--dark-line); display: grid; gap: 0.4rem; align-content: start; }
+  .when { font-size: 11px; color: var(--dark-muted); }
+  h3 { font-size: 1.125rem; letter-spacing: -0.02em; }
+  .meta p { font-size: 14.5px; color: var(--dark-muted); }
+  .after { margin-top: 2.5rem; }
+
+  @media (max-width: 960px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+    .text { justify-self: start; }
+  }
+  @media (max-width: 560px) { .cards { grid-template-columns: 1fr; } }
+</style>

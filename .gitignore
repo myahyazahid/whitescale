@@ -1,0 +1,21 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+.env.production
+
+# design tooling output (screenshot inspeksi, salinan situs referensi, unduhan)
+.taste-skill/
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.DS_Store

@@ -1,0 +1,49 @@
+---
+import { site, waLink } from '../data/site';
+import Icon from './Icon.astro';
+
+const rows = [
+  { label: 'WhatsApp', value: site.whatsappLabel, href: waLink('Halo!'), ext: true },
+  { label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  { label: 'Alamat', value: `${site.address.street}, ${site.address.city}`, href: site.address.mapUrl, ext: true },
+  { label: 'Jam kerja', value: site.address.hours },
+  ...site.social.map((s) => ({ label: s.label, value: s.href.replace(/^https?:\/\//, '').replace(/\/$/, ''), href: s.href, ext: true })),
+];
+---
+
+<section class="band" aria-labelledby="kontak-title">
+  <div class="frame">
+    <div class="inner">
+      <h2 class="sr-only" id="kontak-title">Detail kontak</h2>
+      <ul class="rows">
+        {rows.map((r, i) => (
+          <li data-reveal style={`--i: ${i % 4}`}>
+            {r.href ? (
+              <a href={r.href} target={r.ext ? '_blank' : undefined} rel={r.ext ? 'noopener' : undefined}>
+                <span class="mono k">{r.label}</span><span class="v">{r.value}</span><span class="mono go">Buka <Icon name="arrow-up-right" size={14} /></span>
+              </a>
+            ) : (
+              <div class="row"><span class="mono k">{r.label}</span><span class="v">{r.value}</span><span></span></div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rows { border-top: 1px solid var(--line); }
+  li { border-bottom: 1px solid var(--line); }
+  a, .row { display: grid; grid-template-columns: 10rem 1fr auto; gap: 1.5rem; align-items: center; padding: 1.5rem 0.75rem; }
+  a { transition: background-color 160ms ease; }
+  a:hover { background: var(--white); }
+  .k { font-size: 11.5px; color: var(--muted); }
+  .v { font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem); letter-spacing: -0.02em; overflow-wrap: anywhere; }
+  .go { font-size: 11.5px; display: inline-flex; gap: 0.4rem; align-items: center; }
+  a:hover .go { color: var(--brand-text); }
+  @media (max-width: 640px) {
+    a, .row { grid-template-columns: 1fr auto; gap: 0.35rem 1rem; }
+    .k { grid-column: 1 / -1; }
+  }
+</style>

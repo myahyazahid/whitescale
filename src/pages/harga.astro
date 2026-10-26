@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PriceList from '../components/PriceList.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { waLink } from '../data/site';
+---
+
+<Base title="Harga | whitescale" description="Perkiraan harga website, aplikasi mobile, dan sistem custom dari whitescale.">
+  <PageHero label="Harga" title="Harga jelas sebelum mulai" lead="Harga awal di bawah adalah perkiraan. Setelah konsultasi gratis, kamu menerima harga tetap tertulis sesuai ruang lingkup.">
+    <a class="btn btn-brand" href={waLink('Halo, saya mau minta penawaran harga.')} target="_blank" rel="noopener">Minta penawaran</a>
+  </PageHero>
+  <PriceList showHead={false} />
+  <Faq />
+  <CtaBand />
+</Base>
