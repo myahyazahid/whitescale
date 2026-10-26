@@ -14,9 +14,10 @@ const logos = stack.map((name) => allIcons.find((i) => i.title === name)).filter
     <div class="glow" aria-hidden="true"></div>
     <HeroLines />
     <div class="content">
-      <h1 class="h1 title">Software yang tumbuh<br />bersama bisnismu</h1>
+   
+      <h1 class="h1 title"><span class="line"><span class="sheen">The Best</span> <span class="sheen accent">Software</span> <span class="sheen">and</span></span><span class="line"><span class="sheen accent spark"><svg class="sparkle" viewBox="0 0 24 24" aria-hidden="true"><g class="burst"><line class="ray" x1="12" y1="2" x2="12" y2="8" /><line class="ray b" x1="19.1" y1="4.9" x2="15.2" y2="8.8" /><line class="ray" x1="22" y1="12" x2="16" y2="12" /><line class="ray b" x1="19.1" y1="19.1" x2="15.2" y2="15.2" /><line class="ray" x1="12" y1="22" x2="12" y2="16" /><line class="ray b" x1="4.9" y1="19.1" x2="8.8" y2="15.2" /><line class="ray" x1="2" y1="12" x2="8" y2="12" /><line class="ray b" x1="4.9" y1="4.9" x2="8.8" y2="8.8" /></g></svg>Technology Partner</span> <span class="sheen">to Digitalize</span></span><span class="line"><span class="sheen">and Scale Your Business</span></span></h1>
       <div class="below">
-        <p class="lead">Kami membangun website, aplikasi mobile, dan sistem custom untuk bisnis, dari ide pertama sampai dipakai setiap hari.</p>
+        <p class="lead"><span class="ln">Partner teknologi yang tepat untuk membawa bisnis anda berkembang lebih cepat. Kami menghadirkan </span><span class="ln">solusi digital yang dirancang sesuai kebutuhan bisnis, mulai dari website hingga custom </span><span class="ln">software untuk mendukung pertumbuhan dan skalabilitas bisnis anda.</span></p>
         <div class="cta">
           <a class="btn btn-brand" href={waLink('Halo, saya mau konsultasi gratis.')} target="_blank" rel="noopener">Konsultasi gratis</a>
           <a class="btn btn-outline" href="/karya">Lihat karya <Icon name="arrow" /></a>
@@ -64,9 +65,42 @@ const logos = stack.map((name) => allIcons.find((i) => i.title === name)).filter
       radial-gradient(35% 90% at 82% 0%, rgba(255, 161, 161, 0.2), transparent 72%);
   }
   .content { position: relative; z-index: 1; width: 100%; padding: 120px var(--pad) 64px; display: grid; justify-items: center; text-align: center; }
-  .title { max-width: 16ch; }
-  .below { margin-top: 200px; display: grid; justify-items: center; gap: 2rem; }
-  .lead { max-width: 52ch; }
+  .title { font-size: clamp(1.75rem, 0.8rem + 3.4vw, 3.5rem); font-weight: 600; }
+  .title .line { display: block; }
+  .title { color: #1a1b2e; letter-spacing: -0.045em; text-wrap: balance; }
+  /* Kilau menyapu huruf + glow berdenyut, meniru angka harga di katalog Flexmansion.
+     Gradien dibuat 260% selebar teks lalu digeser kanan ke kiri; sapuan hanya memakai
+     separuh durasi, sisanya diam supaya terbaca sebagai sapuan. Glow memakai
+     drop-shadow karena huruf transparan (text-shadow akan menembus huruf). */
+  .title .sheen.accent {
+    background-image:
+      linear-gradient(100deg, transparent 0%, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%, transparent 100%),
+      linear-gradient(95deg, #5a3ff5 10%, #8b5cf6 55%, #e879a8 100%);
+    background-size: 260% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    animation: sheen-accent 4s linear infinite;
+  }
+  .title .spark { position: relative; }
+  .sparkle { position: absolute; left: -0.6em; top: -0.1em; width: 0.5em; height: 0.5em; overflow: visible; fill: none; stroke: var(--brand); stroke-width: 2.4; stroke-linecap: round; -webkit-text-fill-color: initial; }
+  /* gaya spinner "loading": delapan sinar berputar pelan, sinar selang-seling berdenyut */
+  .sparkle .burst { transform-box: view-box; transform-origin: 12px 12px; animation: spark-spin 6s linear infinite; }
+  .sparkle .ray { transform-box: view-box; transform-origin: 12px 12px; animation: spark-ray 1.6s ease-in-out infinite; }
+  .sparkle .ray.b { animation-delay: 0.8s; }
+  @keyframes sheen-accent { 0% { background-position: 100% 0, 0 0; } 50%, 100% { background-position: 0 0, 0 0; } }
+  @keyframes spark-spin { to { transform: rotate(360deg); } }
+  @keyframes spark-ray { 0%, 100% { transform: scale(0.7); opacity: 0.55; } 50% { transform: scale(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    .title .sheen.accent, .sparkle .burst, .sparkle .ray { animation: none; }
+  }
+  .below { margin-top: 150px; display: grid; justify-items: center; gap: 2rem; }
+  .lead { max-width: 52ch; font-size: clamp(0.9375rem, 0.9rem + 0.3vw, 1.0625rem); }
+  /* tiga baris menyempit ke bawah di desktop; di layar kecil mengalir biasa */
+  @media (min-width: 761px) {
+    .lead { max-width: none; }
+    .lead .ln { display: block; }
+  }
   .cta { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
 
   .bottom { background: var(--bg); }
@@ -92,7 +126,7 @@ const logos = stack.map((name) => allIcons.find((i) => i.title === name)).filter
   @media (max-width: 760px) {
     .stage { min-height: 600px; }
     .content { padding-top: 72px; }
-    .below { margin-top: 150px; }
+    .below { margin-top: 110px; }
     .facts { grid-template-columns: 1fr 1fr; }
     .facts > div:nth-child(3) { border-left: 0; }
     .facts > div:nth-child(n + 3) { border-top: 1px solid var(--line); }

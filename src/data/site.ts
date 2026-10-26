@@ -13,7 +13,7 @@ export const site = {
   // CONTOH: ganti dengan alamat asli.
   address: {
     street: 'Rungkut',
-    city: 'Surabaya',
+    city: 'Surabaya, Indonesia',
     hours: 'Senin–Jumat, 09.00–17.00 WIB',
     mapUrl: 'https://maps.google.com/?q=Surabaya',
   },
