@@ -2,8 +2,15 @@
 import { site } from '../data/site';
 ---
 
-<span class="logo">{site.name}</span>
+<span class="logo">
+  <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+    <rect x="3.8" y="3.8" width="16.4" height="16.4" rx="3.2" fill="var(--brand)" transform="rotate(45 12 12)" />
+    <path d="M7.2 9.7 9.5 15.1 12 11 14.5 15.1 16.8 9.7" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <span class="word">{site.name}</span>
+</span>
 
 <style>
-  .logo { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.035em; }
+  .logo { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .word { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.035em; }
 </style>

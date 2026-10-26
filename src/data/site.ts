@@ -43,7 +43,8 @@ export const facts = [
   { label: 'Source code', value: '100% milikmu' },
 ];
 
-export const stack = ['Astro', 'Next.js', 'Laravel', 'Flutter', 'PostgreSQL', 'Supabase', 'Figma', 'AWS', 'Vercel', 'Firebase'];
+// Nama harus sama persis dengan judul ikon di paket simple-icons.
+export const stack = ['Next.js', 'React', 'Vue.js', 'Astro', 'Laravel', 'Flutter', 'Tailwind CSS', 'PostgreSQL', 'Supabase', 'Firebase', 'Docker', 'Vercel', 'Figma'];
 
 export type IconName = 'globe' | 'phone' | 'layers' | 'spark' | 'chat' | 'pen' | 'code' | 'rocket' | 'shield' | 'chart' | 'cart' | 'bolt';
 
